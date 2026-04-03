@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#D7FDD9">
+  <title>Let's cook with Nâu</title>
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <button class="icon-button topbar-icon" id="headerPrimaryButton" type="button" aria-label="Open chooser">
+        <svg id="headerPrimaryBack" viewBox="0 0 24 24" aria-hidden="true" class="hidden">
+          <path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2"></path>
+        </svg>
+        <svg id="headerPrimaryMenu" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2.2"></path>
+        </svg>
+      </button>
+
+      <div class="brand">
+        <img src="./assets/logo.png" alt="Nau logo" class="brand-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="brand-fallback" aria-hidden="true">NAU</div>
+      </div>
+
+      <button class="icon-button topbar-icon" id="headerCartButton" type="button" aria-label="Open cart">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M3 5h2l1.3 8.1A1 1 0 0 0 7.3 14H17a1 1 0 0 0 1-.8L19.5 7H7.2" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+          <circle cx="9" cy="18" r="1.5" fill="none" stroke="currentColor" stroke-width="2"></circle>
+          <circle cx="17" cy="18" r="1.5" fill="none" stroke="currentColor" stroke-width="2"></circle>
+        </svg>
+      </button>
+    </header>
+
+    <main class="page-stack">
+      <section class="page active" data-page="home">
+        <div class="home-top-shell">
+          <div class="home-assistant-bar">
+            <div class="assistant-avatar">
+              <img src="./assets/logo_mascot.png" alt="Assistant mascot" onerror="this.style.display='none'; this.parentElement.textContent='AI';">
+            </div>
+            <button class="search-prompt" id="homeSearchPrompt" type="button" aria-label="Start recipe search">
+              <span class="food-icon" aria-hidden="true">
+                <img src="./assets/Meal.png" alt="" onerror="this.style.display='none'; this.parentElement.innerHTML='';">
+              </span>
+              <span>What would you like to cook today?</span>
+            </button>
+          </div>
+          <div class="home-divider" aria-hidden="true"></div>
+        </div>
+
+        <div class="home-filter-row">
+          <div class="filter-dot-group" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <button class="home-filter-chip active" data-home-filter="all" type="button">all</button>
+          <button class="home-filter-chip" data-home-filter="vegetable" type="button">veg</button>
+          <button class="home-filter-chip" data-home-filter="meat" type="button">meat</button>
+          <button class="home-filter-chip" data-home-filter="fish" type="button">fish</button>
+          <button class="home-filter-chip" data-home-filter="dairy" type="button">milk</button>
+          <button class="home-filter-chip" data-home-filter="pantry" type="button">rice</button>
+          <button class="home-filter-chip" data-home-filter="egg" type="button">eggs</button>
+        </div>
+
+        <section class="dashboard-grid home-product-grid">
+          <article class="product-tile" data-category="egg">
+            <div class="product-photo"><img src="./assets/11.png" alt="Egg package"></div>
+            <div class="product-controls">
+              <button class="qty-button qty-minus" data-qty-action="decrease" data-qty-target="item-11" type="button" aria-label="Decrease item 11">-</button>
+              <span class="qty-count" data-qty-value="item-11">1</span>
+              <button class="qty-button qty-plus" data-qty-action="increase" data-qty-target="item-11" type="button" aria-label="Increase item 11">+</button>
+            </div>
+          </article>
+
+          <article class="product-tile" data-category="meat">
+            <div class="product-photo"><img src="./assets/3.png" alt="Meat tray"></div>
+            <div class="product-controls">
+              <button class="qty-button qty-minus" data-qty-action="decrease" data-qty-target="item-3" type="button" aria-label="Decrease item 3">-</button>
+              <span class="qty-count" data-qty-value="item-3">1</span>
+              <button class="qty-button qty-plus" data-qty-action="increase" data-qty-target="item-3" type="button" aria-label="Increase item 3">+</button>
+            </div>
+          </article>
+
+          <article class="product-tile" data-category="vegetable">
+            <div class="product-photo"><img src="./assets/1.png" alt="Vegetable tray"></div>
+            <div class="product-controls">
+              <button class="qty-button qty-minus" data-qty-action="decrease" data-qty-target="item-1" type="button" aria-label="Decrease item 1">-</button>
+              <span class="qty-count" data-qty-value="item-1">1</span>
+              <button class="qty-button qty-plus" data-qty-action="increase" data-qty-target="item-1" type="button" aria-label="Increase item 1">+</button>
+            </div>
+          </article>
+
+          <article class="product-tile" data-category="dairy">
+            <div class="product-photo"><img src="./assets/10.png" alt="Milk package"></div>
+            <div class="product-controls">
+              <button class="qty-button qty-minus" data-qty-action="decrease" data-qty-target="item-10" type="button" aria-label="Decrease item 10">-</button>
+              <span class="qty-count" data-qty-value="item-10">1</span>
+              <button class="qty-button qty-plus" data-qty-action="increase" data-qty-target="item-10" type="button" aria-label="Increase item 10">+</button>
+            </div>
+          </article>
+
+          <article class="product-tile" data-category="vegetable">
+            <div class="product-photo"><img src="./assets/7.png" alt="Vegetable box"></div>
+            <div class="product-controls">
+              <button class="qty-button qty-minus" data-qty-action="decrease" data-qty-target="item-7" type="button" aria-label="Decrease item 7">-</button>
+              <span class="qty-count" data-qty-value="item-7">1</span>
+              <button class="qty-button qty-plus" data-qty-action="increase" data-qty-target="item-7" type="button" aria-label="Increase item 7">+</button>
+            </div>
+          </article>
+
+          <article class="product-tile" data-category="fish">
+            <div class="product-photo"><img src="./assets/9.png" alt="Fish package"></div>
+            <div class="product-controls">
+              <button class="qty-button qty-minus" data-qty-action="decrease" data-qty-target="item-9" type="button" aria-label="Decrease item 9">-</button>
+              <span class="qty-count" data-qty-value="item-9">1</span>
+              <button class="qty-button qty-plus" data-qty-action="increase" data-qty-target="item-9" type="button" aria-label="Increase item 9">+</button>
+            </div>
+          </article>
+
+          <article class="product-tile" data-category="pantry">
+            <div class="product-photo"><img src="./assets/12.png" alt="Rice bag"></div>
+            <div class="product-controls">
+              <button class="qty-button qty-minus" data-qty-action="decrease" data-qty-target="item-12" type="button" aria-label="Decrease item 12">-</button>
+              <span class="qty-count" data-qty-value="item-12">1</span>
+              <button class="qty-button qty-plus" data-qty-action="increase" data-qty-target="item-12" type="button" aria-label="Increase item 12">+</button>
+            </div>
+          </article>
+
+          <article class="product-tile" data-category="vegetable">
+            <div class="product-photo"><img src="./assets/5.png" alt="Fresh produce"></div>
+            <div class="product-controls">
+              <button class="qty-button qty-minus" data-qty-action="decrease" data-qty-target="item-5" type="button" aria-label="Decrease item 5">-</button>
+              <span class="qty-count" data-qty-value="item-5">1</span>
+              <button class="qty-button qty-plus" data-qty-action="increase" data-qty-target="item-5" type="button" aria-label="Increase item 5">+</button>
+            </div>
+          </article>
+        </section>
+      </section>
+
+      <section class="page" data-page="chooser">
+        <div class="chooser-screen">
+          <div class="chooser-top-shell">
+            <div class="chooser-search-strip">
+              <div class="assistant-avatar assistant-avatar-small">
+                <img src="./assets/logo_mascot.png" alt="Assistant mascot" onerror="this.style.display='none'; this.parentElement.textContent='AI';">
+              </div>
+              <div class="search-prompt chooser-prompt" aria-hidden="true">
+                <span class="food-icon" aria-hidden="true">
+                  <img src="./assets/Meal.png" alt="">
+                </span>
+                <span>What would you like to cook today?</span>
+              </div>
+            </div>
+            <div class="home-divider" aria-hidden="true"></div>
+          </div>
+
+          <div class="chooser-background">
+            <div class="chooser-filter-row" aria-hidden="true">
+              <div class="filter-dot-group">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+              <button class="chooser-chip" type="button">meat</button>
+              <button class="chooser-chip" type="button">fish</button>
+              <button class="chooser-chip" type="button">milk</button>
+            </div>
+
+            <section class="dashboard-grid home-product-grid chooser-grid" aria-hidden="true">
+              <article class="product-tile product-tile-placeholder"></article>
+              <article class="product-tile product-tile-placeholder"></article>
+              <article class="product-tile product-tile-placeholder"></article>
+              <article class="product-tile product-tile-placeholder"></article>
+            </section>
+          </div>
+
+          <div class="chooser-sheet">
+            <div class="chooser-copy">
+              <p>Choose how you'd like to get cooking suggestions:</p>
+              <ol>
+                <li>Search by dish name</li>
+                <li>Search by your ingredients</li>
+              </ol>
+            </div>
+            <div class="chooser-actions">
+              <button class="chooser-action-button" data-open-search="dish" type="button">Dish name</button>
+              <button class="chooser-action-button" data-open-search="ingredients" type="button">Ingredients</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="page" data-page="dish-search">
+        <div class="dish-search-layout">
+          <section class="dish-search-box">
+            <div class="dish-search-bar">
+              <span class="food-icon" aria-hidden="true">
+                <img src="./assets/Meal.png" alt="">
+              </span>
+              <input type="text" id="dishNameInput" placeholder="Enter dish name">
+              <button class="small-icon-button" id="voiceButton" type="button" aria-label="Voice input">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12 4a3 3 0 0 0-3 3v5a3 3 0 0 0 6 0V7a3 3 0 0 0-3-3Z" fill="none" stroke="currentColor" stroke-width="2"></path>
+                  <path d="M6.5 11.5a5.5 5.5 0 0 0 11 0M12 17v3M9.5 20h5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"></path>
+                </svg>
+              </button>
+              <button class="small-icon-button" id="clearDishButton" type="button" aria-label="Clear dish name">×</button>
+            </div>
+          </section>
+
+          <section class="dish-card">
+            <p class="dish-card-title">Number of servings:</p>
+            <div class="serving-value" id="servingValue">2</div>
+            <input class="serving-slider" id="servingSlider" type="range" min="1" max="10" value="2">
+          </section>
+
+          <section class="dish-card">
+            <p class="dish-card-title">If you have any allergies, please enter them here.</p>
+            <div class="allergy-entry">
+              <span class="allergy-entry-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <path d="M4 7h16v10H4zM7 4v6M17 4v6M8 11h3M13 11h3M8 15h8" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path>
+                </svg>
+              </span>
+              <input type="text" id="dishAllergiesInput" placeholder="peanut, shrimp, milk">
+            </div>
+          </section>
+
+          <div class="dish-search-actions">
+            <button class="round-action round-action-back" id="dishSearchBackButton" type="button" aria-label="Back to home">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2"></path>
+              </svg>
+            </button>
+            <button class="round-action round-action-cart" id="dishSearchCartButton" type="button" aria-label="Open shopping cart">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M3 5h2l1.3 8.1A1 1 0 0 0 7.3 14H17a1 1 0 0 0 1-.8L19.5 7H7.2" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                <circle cx="9" cy="18" r="1.5" fill="none" stroke="currentColor" stroke-width="2"></circle>
+                <circle cx="17" cy="18" r="1.5" fill="none" stroke="currentColor" stroke-width="2"></circle>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section class="page" data-page="ingredients-search">
+        <div class="ingredients-search-layout">
+          <div class="ingredients-entry-shell">
+            <div class="assistant-avatar ingredients-avatar">
+              <img src="./assets/logo_mascot.png" alt="Assistant mascot" onerror="this.style.display='none'; this.parentElement.textContent='AI';">
+            </div>
+
+            <section class="ingredients-chat-card">
+              <div class="ingredients-chat-top">
+                <span class="food-icon" aria-hidden="true">
+                  <img src="./assets/Meal.png" alt="">
+                </span>
+                <textarea id="ingredientsInput" rows="3" placeholder="bo chi heo, cá bông lau, tiêu, trứng, cà chua"></textarea>
+                <button class="small-icon-button ingredients-clear-button" id="clearIngredientsButton" type="button" aria-label="Clear ingredients">×</button>
+              </div>
+              <div class="ingredients-chat-bottom">
+                <button class="small-icon-button ingredients-mic-button" id="ingredientsMicButton" type="button" aria-label="Voice input">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M12 4a3 3 0 0 0-3 3v5a3 3 0 0 0 6 0V7a3 3 0 0 0-3-3Z" fill="none" stroke="currentColor" stroke-width="2"></path>
+                    <path d="M6.5 11.5a5.5 5.5 0 0 0 11 0M12 17v3M9.5 20h5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"></path>
+                  </svg>
+                </button>
+              </div>
+            </section>
+          </div>
+
+          <div class="ingredients-search-actions">
+            <button class="round-action round-action-back" id="ingredientSearchBackButton" type="button" aria-label="Back to home">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2"></path>
+              </svg>
+            </button>
+            <button class="round-action round-action-yellow" id="ingredientSearchSubmitButton" type="button" aria-label="Analyze ingredients">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M5 12.5 10 17l9-10" fill="none" stroke="#7b39a5" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.8"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section class="page" data-page="ingredient-suggestions">
+        <div class="ingredient-results-layout">
+          <div class="cart-top-actions ingredient-results-actions">
+            <button class="round-action round-action-back" id="ingredientSuggestionsBackButton" type="button" aria-label="Back to ingredient search">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2"></path>
+              </svg>
+            </button>
+            <button class="round-action round-action-white" id="ingredientSuggestionsShareButton" type="button" aria-label="Share suggestion list">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M15 8V4l5 5-5 5v-4H9a4 4 0 0 0-4 4v1" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+              </svg>
+            </button>
+          </div>
+
+          <div id="ingredientSuggestionList" class="ingredient-suggestion-list"></div>
+        </div>
+      </section>
+
+      <section class="page" data-page="ingredient-detail">
+        <div class="ingredient-detail-layout">
+          <div class="ingredient-detail-hero">
+            <img id="ingredientDetailImage" src="./assets/9.png" alt="Suggested dish image">
+            <div class="cart-top-actions ingredient-detail-actions">
+              <button class="round-action round-action-back" id="ingredientDetailBackButton" type="button" aria-label="Back to suggestions">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2"></path>
+                </svg>
+              </button>
+              <button class="round-action round-action-white" id="ingredientDetailShareButton" type="button" aria-label="Share dish">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M15 8V4l5 5-5 5v-4H9a4 4 0 0 0-4 4v1" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <article class="ingredient-detail-sheet">
+            <h1 id="ingredientDetailTitle">Cá kho tiêu</h1>
+            <div id="ingredientDetailDescription" class="ingredient-detail-copy"></div>
+
+            <div class="ingredient-detail-cta">
+              <button class="ghost-pill-button" id="ingredientTryOthersButton" type="button">Try others</button>
+              <button class="primary-pill-button" id="ingredientLetsCookButton" type="button">Let's cook this!</button>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="page" data-page="cart">
+        <div class="cart-page-shell">
+          <div class="cart-top-actions">
+            <button class="round-action round-action-yellow" id="cartBackButton" type="button" aria-label="Go back">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2"></path>
+              </svg>
+            </button>
+            <button class="round-action round-action-white" id="removeFlaggedButton" type="button" aria-label="Remove allergic items">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M8 8l8 8M16 8l-8 8" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"></path>
+              </svg>
+            </button>
+          </div>
+
+          <div id="allergyAlertBox" class="cart-alert hidden"></div>
+          <div id="cartList" class="cart-visual-list"></div>
+
+          <button class="cart-add-strip" id="proceedAnywayButton" type="button">+</button>
+
+          <button class="buy-now-button" id="checkoutButton" type="button" aria-label="Buy now">
+            <img src="./assets/buynow.png" alt="Buy now" onerror="this.style.display='none'; this.parentElement.textContent='Buy now';">
+          </button>
+        </div>
+      </section>
+
+      <section class="page" data-page="payment">
+        <div class="payment-page-shell">
+          <button class="round-action round-action-yellow payment-back" id="paymentBackButton" type="button" aria-label="Back">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2"></path>
+            </svg>
+          </button>
+
+          <section class="payment-sheet">
+            <div class="payment-status">
+              <svg viewBox="0 0 64 64" aria-hidden="true">
+                <path d="M10 19h44v26H10zM18 11v16M46 11v16M20 34l8 8 16-16" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"></path>
+              </svg>
+              <h1>Payment successfully !!!</h1>
+            </div>
+
+            <div class="payment-actions">
+              <button class="payment-link-button" id="paymentHomeButton" type="button">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-4.5v-6h-5v6H5a1 1 0 0 1-1-1z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></path>
+                </svg>
+                <span>Home</span>
+              </button>
+
+              <button class="payment-recipe-button" id="paymentRecipeButton" type="button" aria-label="Open recipe">
+                <img src="./assets/recipes.png" alt="">
+              </button>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <section class="page" data-page="recipe">
+        <div class="recipe-page-shell">
+          <article class="recipe-page-card">
+            <h1 id="recipeTitle" class="recipe-title">Recipe title</h1>
+            <div id="recipeMeta" class="recipe-meta"></div>
+
+            <section class="recipe-columns">
+              <div>
+                <h2>Ingredients</h2>
+                <ul id="recipeIngredients" class="list"></ul>
+              </div>
+              <div>
+                <h2>Instructions</h2>
+                <ol id="recipeSteps" class="steps"></ol>
+              </div>
+            </section>
+
+            <div id="recipeLinks" class="recipe-links"></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="page" data-page="scan">
+        <div class="scan-page-shell">
+          <div class="scan-preview-shell">
+            <video id="scanVideo" autoplay playsinline muted></video>
+            <img id="scanPreviewImage" class="hidden" alt="Scanned preview">
+            <div class="scan-target-frame" aria-hidden="true"></div>
+          </div>
+
+          <p class="scan-status" id="scanStatusText">Point the camera at ingredients or import a photo from your device.</p>
+
+          <div class="scan-action-row">
+            <label class="scan-side-button scan-import-button" id="scanImportButton" for="scanFileInput" aria-label="Import image" tabindex="0">
+              <img src="./assets/import_IMG.png" alt="Import image">
+            </label>
+
+            <button class="scan-center-button" id="scanCaptureButton" type="button" aria-label="Scan now">
+              <img src="./assets/scan-button.png" alt="Scan">
+            </button>
+
+            <button class="scan-side-button scan-reset-button" id="scanResetButton" type="button" aria-label="Reset scan">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M7 7V4L3 8l4 4V9a7 7 0 1 1-2.1 5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+              </svg>
+            </button>
+          </div>
+
+          <input id="scanFileInput" class="visually-hidden-file-input" type="file" accept="image/*">
+        </div>
+      </section>
+
+      <section class="page" data-page="scan-suggestions">
+        <div class="ingredient-results-layout">
+          <div class="cart-top-actions ingredient-results-actions">
+            <button class="round-action round-action-back" id="scanSuggestionsBackButton" type="button" aria-label="Back to scan">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2"></path>
+              </svg>
+            </button>
+            <button class="round-action round-action-white" id="scanSuggestionsShareButton" type="button" aria-label="Share suggestion list">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M15 8V4l5 5-5 5v-4H9a4 4 0 0 0-4 4v1" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+              </svg>
+            </button>
+          </div>
+
+          <div id="scanSuggestionList" class="ingredient-suggestion-list"></div>
+        </div>
+      </section>
+
+      <section class="page" data-page="scan-detail">
+        <div class="ingredient-detail-layout">
+          <div class="ingredient-detail-hero scan-detail-hero">
+            <img id="scanDetailImage" src="./assets/3.png" alt="Suggested scan dish image">
+            <div class="cart-top-actions ingredient-detail-actions">
+              <button class="round-action round-action-back" id="scanDetailBackButton" type="button" aria-label="Back to scan suggestions">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2"></path>
+                </svg>
+              </button>
+              <button class="round-action round-action-white" id="scanDetailShareButton" type="button" aria-label="Share scan dish">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M15 8V4l5 5-5 5v-4H9a4 4 0 0 0-4 4v1" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <article class="ingredient-detail-sheet">
+            <h1 id="scanDetailTitle">Suggested dish</h1>
+            <div id="scanDetailDescription" class="ingredient-detail-copy"></div>
+
+            <div class="ingredient-detail-cta">
+              <button class="ghost-pill-button" id="scanTryOthersButton" type="button">Try others</button>
+              <button class="primary-pill-button" id="scanLetsCookButton" type="button">Let's cook this!</button>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="page" data-page="scan-cook">
+        <div class="scan-cook-layout">
+          <div class="cart-top-actions ingredient-results-actions">
+            <button class="round-action round-action-back" id="scanCookBackButton" type="button" aria-label="Back to scan detail">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2"></path>
+              </svg>
+            </button>
+            <button class="round-action round-action-white" id="scanCookShareButton" type="button" aria-label="Share scan recipe">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M15 8V4l5 5-5 5v-4H9a4 4 0 0 0-4 4v1" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+              </svg>
+            </button>
+          </div>
+
+          <article class="scan-cook-sheet">
+            <h1 id="scanCookTitle">Suggested dish</h1>
+            <div id="scanCookDescription" class="ingredient-detail-copy"></div>
+            <ol id="scanCookSteps" class="steps scan-cook-steps"></ol>
+            <div id="scanCookLinks" class="recipe-links scan-cook-links"></div>
+
+            <div class="scan-cook-divider"></div>
+            <h2 class="scan-extras-title">Grab these extras to make it perfect:</h2>
+            <div id="scanExtrasList" class="scan-extras-grid"></div>
+
+            <div class="scan-cook-actions">
+              <button class="payment-link-button scan-home-link" id="scanCookHomeButton" type="button">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-4.5v-6h-5v6H5a1 1 0 0 1-1-1z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></path>
+                </svg>
+                <span>Home</span>
+              </button>
+              <button class="primary-pill-button scan-buy-button" id="scanBuyExtrasButton" type="button">Buy extras</button>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="page" data-page="scan-cart">
+        <div class="scan-confirm-shell">
+          <div class="cart-top-actions">
+            <button class="round-action round-action-yellow" id="scanCartBackButton" type="button" aria-label="Back to scan cook">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2"></path>
+              </svg>
+            </button>
+            <button class="round-action round-action-white" id="scanCartShareButton" type="button" aria-label="Share extras cart">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M15 8V4l5 5-5 5v-4H9a4 4 0 0 0-4 4v1" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+              </svg>
+            </button>
+          </div>
+
+          <div id="scanCartList" class="scan-confirm-list"></div>
+
+          <button class="cart-add-strip" id="scanAddStripButton" type="button">+</button>
+
+          <button class="buy-now-button" id="scanCheckoutButton" type="button" aria-label="Buy now">
+            <img src="./assets/buynow.png" alt="Buy now">
+          </button>
+        </div>
+      </section>
+
+      <section class="page" data-page="notifications">
+        <div class="placeholder-page">
+          <h1>Alerts</h1>
+          <p>Allergy warnings and cooking reminders will appear here.</p>
+        </div>
+      </section>
+
+      <section class="page" data-page="profile">
+        <div class="placeholder-page">
+          <h1>Settings</h1>
+          <p>Gemini runs from the Vercel backend for this deployment. Set <code>GEMINI_API_KEY</code> in Project Settings > Environment Variables, then redeploy.</p>
+        </div>
+      </section>
+    </main>
+
+    <nav class="bottom-nav" aria-label="Primary">
+      <button class="nav-item active" data-route="home" type="button" aria-label="Home">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-4.5v-6h-5v6H5a1 1 0 0 1-1-1z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></path>
+        </svg>
+        <span>Home</span>
+      </button>
+      <button class="nav-item" data-route="search" type="button" aria-label="Search">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="11" cy="11" r="6" fill="none" stroke="currentColor" stroke-width="2"></circle>
+          <path d="M20 20l-4.35-4.35" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"></path>
+        </svg>
+        <span>Search</span>
+      </button>
+      <button class="nav-item nav-scan" data-route="scan" type="button" aria-label="Scan">
+        <div class="scan-fab">
+          <img src="./assets/scan-button.png" alt="Scan" onerror="this.style.display='none'; this.parentElement.textContent='Scan';">
+        </div>
+      </button>
+      <button class="nav-item" data-route="notifications" type="button" aria-label="Notifications">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M6 17h12l-1.2-1.6A3 3 0 0 1 16 13.6V10a4 4 0 1 0-8 0v3.6a3 3 0 0 1-.8 1.8Z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></path>
+          <path d="M10 19a2 2 0 0 0 4 0" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"></path>
+        </svg>
+        <span>Alerts</span>
+      </button>
+      <button class="nav-item" data-route="profile" type="button" aria-label="Settings">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 8.5A3.5 3.5 0 1 0 15.5 12 3.5 3.5 0 0 0 12 8.5Z" fill="none" stroke="currentColor" stroke-width="2"></path>
+          <path d="M19.4 15a1 1 0 0 0 .2 1.1l.1.1a1.5 1.5 0 0 1 0 2.1 1.5 1.5 0 0 1-2.1 0l-.1-.1a1 1 0 0 0-1.1-.2 1 1 0 0 0-.6.9V19a1.5 1.5 0 0 1-3 0v-.2a1 1 0 0 0-.6-.9 1 1 0 0 0-1.1.2l-.1.1a1.5 1.5 0 0 1-2.1 0 1.5 1.5 0 0 1 0-2.1l.1-.1a1 1 0 0 0 .2-1.1 1 1 0 0 0-.9-.6H5a1.5 1.5 0 0 1 0-3h.2a1 1 0 0 0 .9-.6 1 1 0 0 0-.2-1.1l-.1-.1a1.5 1.5 0 0 1 0-2.1 1.5 1.5 0 0 1 2.1 0l.1.1a1 1 0 0 0 1.1.2 1 1 0 0 0 .6-.9V5a1.5 1.5 0 0 1 3 0v.2a1 1 0 0 0 .6.9 1 1 0 0 0 1.1-.2l.1-.1a1.5 1.5 0 0 1 2.1 0 1.5 1.5 0 0 1 0 2.1l-.1.1a1 1 0 0 0-.2 1.1 1 1 0 0 0 .9.6h.2a1.5 1.5 0 0 1 0 3h-.2a1 1 0 0 0-.9.6Z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="1.4"></path>
+        </svg>
+        <span>Settings</span>
+      </button>
+    </nav>
+  </div>
+
+  <script src="./js/app.js"></script>
+</body>
+</html>
+
+
+
